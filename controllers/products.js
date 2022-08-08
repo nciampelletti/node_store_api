@@ -1,8 +1,11 @@
+import Product from "../models/product.js"
+
 export const getAllProductsStatic = async (req, res) => {
-  throw new Error("testing async errors")
-  res.status(200).json({ msg: "Products testing route" })
+  const products = await Product.find({})
+  res.status(200).json({ products, nbHits: products.length })
 }
 
 export const getAllProducts = async (req, res) => {
-  res.status(200).json({ msg: "Products testing route" })
+  const products = await Product.find(req.query)
+  res.status(200).json({ products, nbHits: products.length })
 }
